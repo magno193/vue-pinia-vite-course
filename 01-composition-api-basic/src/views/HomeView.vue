@@ -21,9 +21,18 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed, watch } from 'vue';
-const appTitle = 'App de exemplos Vue'
+//#region imports
+import { reactive, ref, computed, watch, onMounted } from 'vue';
+//#endregion
 
+//#region app title
+const appTitle = 'App de exemplos Vue'
+onMounted(() => {
+  console.log('Coisas relacionadas ao título')
+})
+//#endregion
+
+//#region counter data
 const counterData = reactive({
   counter: 0,
   title: 'Meu contador'
@@ -47,6 +56,11 @@ const decreaseCounter = (amount = 1) => {
 const countSource = () => counterData.counter,
   countHandler = (counter, old) => counter === 20 ? alert('Você atingiu o marco 20!') : null
 watch(countSource, countHandler)
+
+onMounted(() => {
+  console.log('Coisas relacionadas ao contador.');
+})
+//#endregion
 
 </script>
 

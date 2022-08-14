@@ -62,17 +62,13 @@ onMounted(() => {
 })
 //#endregion
 
-</script>
-<script>
-export default {
-  directives: {
-    autofocus: {
-      mounted(el) {
-        el.focus()
-      },
-    }
+//#region directives
+const vAutofocus = {
+  mounted(el) {
+    el.focus()
   }
 }
+//#endregion
 </script>
 
 <style>

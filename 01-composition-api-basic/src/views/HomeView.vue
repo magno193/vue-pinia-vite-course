@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, watch } from 'vue';
 const appTitle = 'App de exemplos Vue'
 
 const counterData = reactive({
@@ -43,6 +43,11 @@ const increaseCounter = (amount = 1) => {
 const decreaseCounter = (amount = 1) => {
   counterData.counter -= amount
 }
+
+const countSource = () => counterData.counter,
+  countHandler = (counter, old) => counter === 20 ? alert('Você atingiu o marco 20!') : null
+watch(countSource, countHandler)
+
 </script>
 
 <style>

@@ -23,6 +23,7 @@
 <script setup>
 //#region imports
 import { reactive, ref, computed, watch, onMounted } from 'vue';
+import { vAutofocus } from '@/directives/vAutofocus'
 //#endregion
 
 //#region app title
@@ -63,11 +64,11 @@ onMounted(() => {
 //#endregion
 
 //#region directives
-const vAutofocus = {
-  mounted(el) {
-    el.focus()
-  }
-}
+// const vAutofocus = {
+//   mounted(el) {
+//     el.focus()
+//   }
+// }
 //#endregion
 </script>
 

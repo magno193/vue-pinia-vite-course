@@ -1,30 +1,35 @@
 <template>
   <div class="home">
-
-    <h3 class="title">{{ counterTitle }}:</h3>
+    <h2>{{ appTitle }}</h2>
+    <h3 class="title">{{ counterData.title }}:</h3>
 
     <div>
       <button class="btn" @click="decreaseCounter">-</button>
-      <span class="counter">{{ counter }}</span>
+      <span class="counter">{{ counterData.counter }}</span>
       <button class="btn" @click="increaseCounter">+</button>
     </div>
 
     <div class="edit">
       <h4>Editar título</h4>
-      <input v-model="counterTitle" type="text">
+      <input v-model="counterData.title" type="text">
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const counter = ref(0),
-  counterTitle = ref("Meu contador")
+import { reactive } from 'vue';
+const appTitle = 'App de exemplos Vue'
+
+const counterData = reactive({
+  counter: 0,
+  title: 'Meu contador'
+})
+
 const increaseCounter = () => {
-  counter.value++
+  counterData.counter++
 }
 const decreaseCounter = () => {
-  counter.value--
+  counterData.counter--
 }
 </script>
 

@@ -13,7 +13,7 @@
 
     <div class="edit">
       <h4>Editar título</h4>
-      <input v-model="counterData.title" type="text">
+      <input v-model="counterData.title" type="text" v-autofocus>
       <h4>Quantidade de mudança (-/+)</h4>
       <input v-model.number="accAmount" type="number">
     </div>
@@ -62,6 +62,17 @@ onMounted(() => {
 })
 //#endregion
 
+</script>
+<script>
+export default {
+  directives: {
+    autofocus: {
+      mounted(el) {
+        el.focus()
+      },
+    }
+  }
+}
 </script>
 
 <style>

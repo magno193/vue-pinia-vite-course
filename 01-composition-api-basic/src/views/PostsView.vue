@@ -3,14 +3,8 @@
     <h1>Postagens</h1>
 
     <ul>
-      <li>
-        <Router-Link to="/posts/id1">Post 1</Router-Link>
-      </li>
-      <li>
-        <Router-Link to="/posts/id2">Post 2</Router-Link>
-      </li>
-      <li>
-        <Router-Link to="/posts/id3">Post 3</Router-Link>
+      <li v-for="post in posts" :key="post.id">
+        <Router-Link :to="`/posts/${post.id}`">{{ post.title }}</Router-Link>
       </li>
     </ul>
 
@@ -19,5 +13,25 @@
 </template>
 
 <script setup>
+//#region Imports
+import { ref } from 'vue';
 import { vAutofocus } from '@/directives/vAutofocus';
+//#endregion
+
+//#region posts
+const posts = ref([
+  {
+    id: 'id1',
+    title: 'Post 1'
+  },
+  {
+    id: 'id2',
+    title: 'Post 2'
+  },
+  {
+    id: 'id3',
+    title: 'Post 3'
+  }
+])
+//#endregion
 </script>

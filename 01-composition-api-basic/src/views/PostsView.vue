@@ -9,6 +9,14 @@
     </ul>
 
     <textarea v-autofocus></textarea>
+
+    <button
+      @click="increaseCounter(1)"
+      class="counter-button"
+      :class="!!oddOrEven.match(/ par/) ? 'green': 'salmon'"
+    >
+      {{ counterData.counter }}
+    </button>
   </div>
 </template>
 
@@ -16,6 +24,7 @@
 //#region Imports
 import { ref } from 'vue';
 import { vAutofocus } from '@/directives/vAutofocus';
+import { useCounter } from '../use/useCounter';
 //#endregion
 
 //#region posts
@@ -34,4 +43,22 @@ const posts = ref([
   }
 ])
 //#endregion
+
+//#region counter btn
+const { oddOrEven, increaseCounter, counterData } = useCounter()
+//#endregion
 </script>
+
+<style scoped>
+.counter-button {
+  font-size: 3rem;
+  width: 100%;
+  background-color: pink;
+}
+.green {
+  color: green;
+}
+.salmon {
+  color: salmon;
+}
+</style>

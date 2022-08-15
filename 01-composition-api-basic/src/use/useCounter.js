@@ -1,10 +1,15 @@
 import { reactive, ref, computed, watch, onMounted, nextTick } from 'vue';
 
+/**
+ * Contador global
+ * <pois está fora da function composable>
+ */
+const counterData = reactive({
+    counter: 0,
+    title: 'Meu contador'
+})
+
 export function useCounter() {
-    const counterData = reactive({
-        counter: 0,
-        title: 'Meu contador'
-    })
     const accAmount = ref(1)
 
     const oddOrEvenFunc = () => {

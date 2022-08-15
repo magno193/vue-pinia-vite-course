@@ -3,11 +3,13 @@
         <h1>Modals</h1>
         <button @click="showModal = true">Mostrar modal</button>
     </div>
-    <div v-if="showModal" class="modal">
-        <h1>Esta é uma modal</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, illo?</p>
-        <button @click="showModal = false">Esconder modal</button>
-    </div>
+    <teleport to=".modals-container">
+        <div v-if="showModal" class="modal">
+            <h1>Esta é uma modal</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, illo?</p>
+            <button @click="showModal = false">Esconder modal</button>
+        </div>
+    </teleport>
 </template> 
 <script setup>
 //#region imports

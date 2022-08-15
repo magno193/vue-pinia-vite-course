@@ -3,7 +3,7 @@
         <div class="modal">
             <h1>{{ title }}</h1>
             <slot />
-            <button @click="$emit('hideModal')">Esconder modal</button>
+            <button @click="handleButtonClick">Esconder modal</button>
         </div>
     </teleport>
 </template>
@@ -24,6 +24,12 @@ const props = defineProps({
 
 //#region emits
 const emits = defineEmits(['hideModal']) // this.$emit('hideModal')
+//#endregion
+
+//#region btn cick
+const handleButtonClick = () => {
+    emits('hideModal')
+}
 //#endregion
 
 //#region slots

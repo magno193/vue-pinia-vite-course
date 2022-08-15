@@ -22,7 +22,7 @@
 
 <script setup>
 //#region imports
-import { reactive, ref, computed, watch, onMounted } from 'vue';
+import { reactive, ref, computed, watch, onMounted, nextTick } from 'vue';
 import { vAutofocus } from '@/directives/vAutofocus'
 //#endregion
 
@@ -49,8 +49,18 @@ const oddOrEvenFunc = () => {
 }
 const oddOrEven = computed(oddOrEvenFunc)
 
-const increaseCounter = (amount = 1) => {
+const increaseCounter = async (amount = 1) => {
   counterData.counter += amount
+
+  /**
+   * Mesmo que o this.$nextTick
+   * Executado após um update em DOM
+   * Pode ser assíncorno
+   */
+  
+  await nextTick(() => {
+    console.log("Faça algo relacionado ao increaseCounter");
+  })
 }
 const decreaseCounter = (amount = 1) => {
   counterData.counter -= amount

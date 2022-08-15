@@ -4,7 +4,6 @@
         <button @click="showModal = true">Mostrar modal</button>
         <Modal
           v-model="showModal"
-          @hide-modal="showModal = false"
           title="Isto é uma modal"
         >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, illo?

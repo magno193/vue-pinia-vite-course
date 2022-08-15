@@ -30,12 +30,12 @@ const props = defineProps({
 //#endregion
 
 //#region emits
-const emits = defineEmits(['hideModal']) // this.$emit('hideModal')
+const emits = defineEmits(['update:modelValue']) // this.$emit('hideModal')
 //#endregion
 
 //#region btn cick
 const handleButtonClick = () => {
-    emits('hideModal')
+    emits('update:modelValue', false)
 }
 //#endregion
 

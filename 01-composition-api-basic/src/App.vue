@@ -1,6 +1,10 @@
 <template>
   <div class="user-data">
     {{ userData.name }} @{{ userData.username }}
+    | Network status:
+    <span :style="{ color: online ? 'green' : 'red' }">
+      {{ "&cir;" }}
+    </span>
   </div>
 
   <nav>
@@ -14,19 +18,24 @@
 
 <script setup>
 //#region imports
-import { RouterLink, RouterView } from 'vue-router'
-import { provide, reactive } from 'vue'
+import { RouterLink, RouterView } from "vue-router";
+import { provide, reactive } from "vue";
+import { useOnline } from "@vueuse/core";
 //#endregion
 
 //#region user data
 const userData = reactive({
-  name: 'Alex',
-  username: 'alexmlf'
-})
+  name: "Alex",
+  username: "alexmlf",
+});
 //#endregion
 
 //#region provide/inject
-provide('userData', userData)
+provide("userData", userData);
+//#endregion
+
+//#region online status (vueuse)
+const online = useOnline();
 //#endregion
 </script>
 
@@ -70,9 +79,17 @@ nav a:first-of-type {
   position: absolute;
   background: #333;
   color: floralwhite;
-  padding: .1rem;
+  padding: 0.1rem;
   border-bottom-left-radius: 0.4rem;
   top: 0;
   right: 0;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
 }
 </style>

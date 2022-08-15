@@ -1,6 +1,9 @@
 <template>
     <teleport to=".modals-container">
-        <div class="modal">
+        <div
+          v-if="modelValue"
+          class="modal"
+        >
             <h1>{{ title }}</h1>
             <slot />
             <button @click="handleButtonClick">Esconder modal</button>
@@ -15,6 +18,10 @@ import { useSlots } from 'vue';
 
 //#region props
 const props = defineProps({
+    modelValue: { // prop especial para v-model
+        type: Boolean,
+        default: false,
+    },
     title: {
         type: String,
         default: 'Nenhum título especificado'

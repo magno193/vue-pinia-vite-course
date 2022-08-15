@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>{{ appTitle }}</h2>
+    <h2 ref="appTitleRef">{{ appTitle }}</h2>
     <h3 class="title">{{ counterData.title }}:</h3>
 
     <div>
@@ -28,8 +28,10 @@ import { vAutofocus } from '@/directives/vAutofocus'
 
 //#region app title
 const appTitle = 'App de exemplos Vue'
+const appTitleRef = ref(null) // options acesso é this.$refs
 onMounted(() => {
-  console.log('Coisas relacionadas ao título')
+  // vira um objeto [object HTMLHeadingElement]
+  console.log(`Ref esta à ${appTitleRef.value.offsetWidth} pixels de largura em relação ao layout`)
 })
 //#endregion
 

@@ -20,13 +20,14 @@
           title="Isto é uma modal"
           v-model="showModal"
         >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, illo?
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, illo?</p>
+            <pre>{{ `Username é ${userData.username || '<não fornecido>'}` }}</pre>
         </component>
     </div>
 </template> 
 <script setup>
 //#region imports
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import Modal from '../components/Modal.vue'
 import ModalDark from '../components/ModalDark.vue'
 //#endregion
@@ -34,5 +35,9 @@ import ModalDark from '../components/ModalDark.vue'
 //#region modals
 const showModal = ref(false)
 const showDarkModals = ref(false)
+//#endregion
+
+//#region provide/inject
+const userData = inject('userData')
 //#endregion
 </script>

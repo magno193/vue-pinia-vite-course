@@ -16,30 +16,30 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute() // mesmo que this.$route em options
-const router = useRouter()
+const route = useRoute(); // mesmo que this.$route em options
+const router = useRouter();
 
 const showPostId = () => {
-  alert(`O ID desta postagem é ${route.params.id}`)
-}
+  alert(`O ID desta postagem é ${route.params.id}`);
+};
 
 const goHomeIn3Sec = () => {
   const funcCallback = () => {
     router.push({
-      name: 'home'
-    })
-  }
-  setTimeout(funcCallback, 3000)
-}
+      name: "home",
+    });
+  };
+  setTimeout(funcCallback, 3000);
+};
 
 const goToFirstPost = () => {
   router.push({
-    name: 'postDetail',
+    name: "postDetail",
     params: {
-      id: 'id1'
-    }
-  })
-}
+      id: "id1",
+    },
+  });
+};
 </script>

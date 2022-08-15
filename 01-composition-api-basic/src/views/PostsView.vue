@@ -13,7 +13,7 @@
     <button
       @click="increaseCounter(1)"
       class="counter-button"
-      :class="!!oddOrEven.match(/ par/) ? 'green': 'salmon'"
+      :class="!!oddOrEven.match(/ par/) ? 'green' : 'salmon'"
     >
       {{ counterData.counter }}
     </button>
@@ -22,30 +22,30 @@
 
 <script setup>
 //#region Imports
-import { ref } from 'vue';
-import { vAutofocus } from '@/directives/vAutofocus';
-import { useCounter } from '../use/useCounter';
+import { ref } from "vue";
+import { vAutofocus } from "@/directives/vAutofocus";
+import { useCounter } from "../use/useCounter";
 //#endregion
 
 //#region posts
 const posts = ref([
   {
-    id: 'id1',
-    title: 'Post 1'
+    id: "id1",
+    title: "Post 1",
   },
   {
-    id: 'id2',
-    title: 'Post 2'
+    id: "id2",
+    title: "Post 2",
   },
   {
-    id: 'id3',
-    title: 'Post 3'
-  }
-])
+    id: "id3",
+    title: "Post 3",
+  },
+]);
 //#endregion
 
 //#region counter btn
-const { oddOrEven, increaseCounter, counterData } = useCounter()
+const { oddOrEven, increaseCounter, counterData } = useCounter();
 //#endregion
 </script>
 

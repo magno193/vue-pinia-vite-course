@@ -13,5 +13,12 @@ export const useCounterStore = defineStore({
     decreaseCounter(amount) {
       this.count -= isNaN(+amount) ? 1 : amount
     }
+  },
+  getters: {
+    oddOrEven: (state) => {
+      return state.count % 2 === 0 
+        ? 'par'
+        : 'ímpar'
+    }
   }
 })

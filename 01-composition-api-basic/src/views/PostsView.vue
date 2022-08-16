@@ -11,11 +11,11 @@
     <textarea v-autofocus></textarea>
 
     <button
-      @click="increaseCounter(1)"
+      @click="counter.increaseCounter"
       class="counter-button"
-      :class="!!oddOrEven.match(/ par/) ? 'green' : 'salmon'"
+      :class="counter.oddOrEvenCSSClass"
     >
-      {{ counterData.counter }}
+      {{ counter.count }}
     </button>
   </div>
 </template>
@@ -24,7 +24,7 @@
 //#region Imports
 import { ref } from "vue";
 import { vAutofocus } from "@/directives/vAutofocus";
-import { useCounter } from "../use/useCounter";
+import { useCounterStore } from "../stores/counter";
 //#endregion
 
 //#region posts
@@ -44,8 +44,8 @@ const posts = ref([
 ]);
 //#endregion
 
-//#region counter btn
-const { oddOrEven, increaseCounter, counterData } = useCounter();
+//#region counter btn (pinia)
+const counter = useCounterStore();
 //#endregion
 </script>
 

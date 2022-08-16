@@ -16,9 +16,12 @@ export const useCounterStore = defineStore({
   },
   getters: {
     oddOrEven: (state) => {
-      return state.count % 2 === 0 
+      return state.count % 2 === 0
         ? 'par'
         : 'ímpar'
+    },
+    oddOrEvenCSSClass() {
+      return !!this.oddOrEven.match(/^par$/) ? 'green' : 'salmon'
     }
   }
 })

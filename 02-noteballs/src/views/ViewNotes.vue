@@ -1,5 +1,7 @@
 <template>
-  <div class="notes">Notas</div>
+  <div class="notes">
+    <h1>Notas</h1>
+  </div>
 </template>
 
 <script setup></script>

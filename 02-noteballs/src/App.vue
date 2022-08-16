@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/">Notas</RouterLink>
+  <RouterLink to="/">Notas</RouterLink> |
   <RouterLink to="stats">Estatísticas</RouterLink>
 
   <RouterView />

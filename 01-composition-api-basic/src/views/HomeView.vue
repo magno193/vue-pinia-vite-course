@@ -59,8 +59,8 @@ const counter = useCounterStore();
 
 .btn,
 .counter {
-  font-size: 3rem;
-  margin: 1rem;
+  font-size: 2.7rem;
+  margin: 0.7rem;
 }
 
 .edit {

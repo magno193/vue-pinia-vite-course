@@ -1,10 +1,18 @@
 <template>
-  <RouterLink to="/">Notas</RouterLink> |
-  <RouterLink to="stats">Estatísticas</RouterLink>
+  <NavBar />
+  <!-- <RouterLink to="/" class="button">Notas</RouterLink> |
+  <RouterLink to="stats" class="button">Estatísticas</RouterLink> -->
 
   <RouterView />
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from "vue-router";
+//#region imports
+import { RouterView } from "vue-router";
+import NavBar from "@/components/Layout/NavBar.vue";
+//#endregion
 </script>
+
+<style>
+@import "bulma/css/bulma.min.css";
+</style>

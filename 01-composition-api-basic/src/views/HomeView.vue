@@ -1,21 +1,21 @@
 <template>
   <div class="home">
     <h2 ref="appTitleRef">{{ appTitle }}</h2>
-    <h3 class="title">{{ counterData.title }}:</h3>
+    <h3 class="title">Counter hard-coded:</h3>
 
     <div>
-      <button class="btn" @click="decreaseCounter(accAmount)">-</button>
-      <span class="counter">{{ counterData.counter }}</span>
-      <button class="btn" @click="increaseCounter(accAmount)">+</button>
+      <button class="btn">--</button>
+      <button class="btn">-</button>
+      <span class="counter">0</span>
+      <button class="btn">+</button>
+      <button class="btn">++</button>
     </div>
 
-    <p>{{ oddOrEven }}</p>
+    <p>Par/ímpar</p>
 
     <div class="edit">
       <h4>Editar título</h4>
-      <input v-model="counterData.title" type="text" v-autofocus />
-      <h4>Quantidade de mudança (-/+)</h4>
-      <input v-model.number="accAmount" type="number" />
+      <input type="text" v-autofocus />
     </div>
   </div>
 </template>
@@ -23,7 +23,6 @@
 <script setup>
 //#region imports
 import { ref, onMounted } from "vue";
-import { useCounter } from "../use/useCounter";
 import { vAutofocus } from "@/directives/vAutofocus";
 //#endregion
 
@@ -39,13 +38,7 @@ onMounted(() => {
 //#endregion
 
 //#region counter data
-const {
-  accAmount,
-  counterData,
-  decreaseCounter,
-  increaseCounter,
-  oddOrEven,
-} = useCounter();
+
 //#endregion
 
 //#region directives

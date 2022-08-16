@@ -3,7 +3,9 @@
   <!-- <RouterLink to="/" class="button">Notas</RouterLink> |
   <RouterLink to="stats" class="button">Estatísticas</RouterLink> -->
 
-  <RouterView />
+  <div class="container is-max-desktop px-2 py-4">
+    <RouterView />
+  </div>
 </template>
 
 <script setup>

@@ -3,39 +3,42 @@
     <div class="card has-background-success-dark p-4 mb-5">
       <div class="field">
         <div class="control">
-          <textarea class="textarea" placeholder="Adicionar nova nota"></textarea>
+          <textarea
+            v-model="noteInput"
+            class="textarea"
+            placeholder="Adicionar nova nota"
+            ref="noteInputRef"
+          ></textarea>
         </div>
       </div>
 
       <div class="field is-grouped is-grouped-right">
         <div class="control">
-          <button class="button is-link has-background-success">
+          <button
+            @click="addNote"
+            :disabled="!noteInput"
+            class="button is-link has-background-success"
+          >
             Adicionar Nova Nota
           </button>
         </div>
       </div>
     </div>
 
-    <div v-for="note in notes" :key="note.key" class="card mb-4">
-      <div class="card-content">
-        <div class="content">
-          {{ note.content }}
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+    <TheNote :note="note" v-for="note in notes" :key="note.id" />
   </div>
 </template>
 
 <script setup>
 //#region imports
 import { ref } from "vue";
+import TheNote from "@/components/Notes/TheNote.vue";
 //#endregion
 
 //#region notes
+const noteInput = ref("");
+const noteInputRef = ref(null); // template ref
+
 const notes = ref([
   {
     id: "id1",
@@ -48,6 +51,22 @@ const notes = ref([
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, expedita.",
   },
 ]);
+
+const addNote = () => {
+  notes.value.unshift({
+    id: generateId(),
+    content: noteInput.value,
+  });
+
+  noteInput.value = ""; // clear
+  noteInputRef.value.focus(); // template ref
+};
+
+const generateId = () =>
+  notes.value.length
+    ? `id ${+notes.value[notes.value.length - 1].id.replace(/\D+/, "") + 1}`
+    : "id1";
+
 //#endregion
 </script>
 

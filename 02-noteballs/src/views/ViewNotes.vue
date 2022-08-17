@@ -25,7 +25,12 @@
       </div>
     </div>
 
-    <TheNote :note="note" v-for="note in notes" :key="note.id" />
+    <TheNote
+      :note="note"
+      @delete-click="deleteNote"
+      v-for="note in notes"
+      :key="note.id"
+    />
   </div>
 </template>
 
@@ -67,6 +72,9 @@ const generateId = () =>
     ? `id ${+notes.value[notes.value.length - 1].id.replace(/\D+/, "") + 1}`
     : "id1";
 
+const deleteNote = (id) => {
+  notes.value = notes.value.filter((note) => note.id !== id);
+};
 //#endregion
 </script>
 

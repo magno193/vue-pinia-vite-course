@@ -18,16 +18,15 @@ export const useStoreNotes = defineStore('storeNotes', {
   actions: {
     addNote(content) {
       this.$state.notes.unshift({
-        id: generateId(this.notes),
+        id: `${Date.now()}@`,
         content
       })
+    },
+    deleteNote(id) {
+      this.notes =
+        this.notes.filter(
+          note => note.id !== id
+        )
     }
   }
 })
-
-//#region helpers
-const generateId = (notes = []) =>
-  notes.length
-    ? `id ${+notes[notes.length - 1].id.replace(/\D+/, "") + 1}`
-    : "id1";
-//#endregion

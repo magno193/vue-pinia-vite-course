@@ -52,19 +52,11 @@ const noteInputRef = ref(null); // template ref
 const notes = ref([]);
 
 const addNote = () => {
-  notes.value.unshift({
-    id: generateId(),
-    content: noteInput.value,
-  });
+  storeNotes.addNote(noteInput.value);
 
   noteInput.value = ""; // clear
   noteInputRef.value.focus(); // template ref
 };
-
-const generateId = () =>
-  notes.value.length
-    ? `id ${+notes.value[notes.value.length - 1].id.replace(/\D+/, "") + 1}`
-    : "id1";
 
 const deleteNote = (id) => {
   notes.value = notes.value.filter((note) => note.id !== id);

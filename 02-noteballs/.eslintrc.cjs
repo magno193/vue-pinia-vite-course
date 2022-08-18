@@ -5,6 +5,9 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended"
   ],
+  "rules": {
+    "vue/no-mutating-props": "warn"
+  },
   "parserOptions": {
     "ecmaVersion": "latest"
   }

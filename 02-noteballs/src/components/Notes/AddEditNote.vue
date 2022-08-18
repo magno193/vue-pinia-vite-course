@@ -3,6 +3,8 @@
     <div class="field">
       <div class="control">
         <textarea
+          v-model="modelValue"
+          @input="$emit('update:modelValue', modelValue)"
           class="textarea"
           placeholder="Adicionar nova nota"
           ref="noteInputRef"
@@ -17,3 +19,18 @@
     </div>
   </div>
 </template>
+
+<script setup>
+//#region props
+defineProps({
+  modelValue: {
+    type: String,
+    required: true,
+  },
+});
+//#endregion
+
+//#region emits
+defineEmits(["update:modelValue"]);
+//#endregion
+</script>

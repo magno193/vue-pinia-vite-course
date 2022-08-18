@@ -1,6 +1,6 @@
 <template>
   <div class="notes">
-    <AddEditNote v-model="noteInput">
+    <AddEditNote v-model="noteInput" ref="addEditNoteRef">
       <template #buttons>
         <button
           @click="addNote"
@@ -30,13 +30,13 @@ const storeNotes = useStoreNotes();
 
 //#region notes
 const noteInput = ref("");
-const noteInputRef = ref(null); // template ref
+const addEditNoteRef = ref(null); // template ref
 
 const addNote = () => {
   storeNotes.addNote(noteInput.value);
 
   noteInput.value = ""; // clear
-  noteInputRef.value.focus(); // template ref
+  addEditNoteRef.value.focusTextarea(); // template ref
 };
 //#endregion
 </script>

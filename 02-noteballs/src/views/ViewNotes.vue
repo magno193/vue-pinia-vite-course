@@ -28,7 +28,7 @@
     <TheNote
       :note="note"
       @delete-click="deleteNote"
-      v-for="note in notes"
+      v-for="note in storeNotes.notes"
       :key="note.id"
     />
   </div>
@@ -38,24 +38,18 @@
 //#region imports
 import { ref } from "vue";
 import TheNote from "@/components/Notes/TheNote.vue";
+import { useStoreNotes } from "../stores/storeNotes";
+//#endregion
+
+//#region store notes
+const storeNotes = useStoreNotes();
 //#endregion
 
 //#region notes
 const noteInput = ref("");
 const noteInputRef = ref(null); // template ref
 
-const notes = ref([
-  {
-    id: "id1",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ea voluptas dolore, voluptatibus velit eos iusto dignissimos accusantium molestias, ut magnam, debitis provident id harum?",
-  },
-  {
-    id: "id2",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, expedita.",
-  },
-]);
+const notes = ref([]);
 
 const addNote = () => {
   notes.value.unshift({

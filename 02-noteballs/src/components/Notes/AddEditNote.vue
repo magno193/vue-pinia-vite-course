@@ -1,12 +1,15 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <div class="card has-background-success-dark p-4 mb-5">
+  <div :class="`card has-background-${bgColor}-dark p-4 mb-5`">
+    <label v-if="label" class="label has-text-white">{{ label }}</label>
+
     <div class="field">
       <div class="control">
         <textarea
           v-model="modelValue"
           @input="$emit('update:modelValue', modelValue)"
           class="textarea"
-          placeholder="Adicionar nova nota"
+          :placeholder="placeholder"
           ref="textareaRef"
         ></textarea>
       </div>
@@ -30,6 +33,17 @@ defineProps({
   modelValue: {
     type: String,
     required: true,
+  },
+  bgColor: {
+    type: String,
+    default: "success",
+  },
+  placeholder: {
+    type: String,
+    default: "Escreva algo...",
+  },
+  label: {
+    type: String,
   },
 });
 //#endregion

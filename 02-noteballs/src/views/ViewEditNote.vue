@@ -19,12 +19,21 @@
 <script setup>
 //#region imports
 import { ref } from "vue";
-// import { useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import AddEditNote from "../components/Notes/AddEditNote.vue";
+import { useStoreNotes } from "@/stores/storeNotes";
+//#endregion
+
+//#region router
+const route = useRoute();
 //#endregion
 
 //#region note
 const noteContent = ref();
+//#endregion
 
+//#region store note
+const storeNotes = useStoreNotes();
+noteContent.value = storeNotes.getNoteContent(route.params.id);
 //#endregion
 </script>

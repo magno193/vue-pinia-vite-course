@@ -15,6 +15,15 @@ export const useStoreNotes = defineStore('storeNotes', {
       }
     ]
   }),
+  getters: {
+    getNoteContent(state) {
+      /**
+       * Um getter com parâmetros precisa ser
+       * uma arrow function
+       */
+      return (id) => state.notes.find(note => note.id === id).content
+    },
+  },
   actions: {
     addNote(content) {
       this.$state.notes.unshift({

@@ -36,6 +36,10 @@ export const useStoreNotes = defineStore('storeNotes', {
         this.notes.filter(
           note => note.id !== id
         )
+    },
+    updateNote(payload) { 
+      let idxFound = this.notes.findIndex(note => note.id === payload.id);
+      this.notes.at(idxFound).content = payload.content 
     }
   }
 })

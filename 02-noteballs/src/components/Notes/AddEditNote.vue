@@ -27,6 +27,7 @@
 <script setup>
 //#region imports
 import { ref } from "vue";
+import { vAutofocus } from "@/directives/vAutofocus";
 //#endregion
 
 //#region props
@@ -59,18 +60,11 @@ const textareaRef = ref(null);
 const focusTextarea = () => {
   textareaRef.value.focus();
 };
+//#endregion
 
-// expor método para outro componente
+//#region expor método para outro componente
 defineExpose({
   focusTextarea,
 });
-//#endregion
-
-//#region directives
-const vAutofocus = {
-  mounted(el) {
-    el.focus();
-  },
-};
 //#endregion
 </script>

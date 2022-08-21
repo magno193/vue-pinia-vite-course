@@ -10,15 +10,17 @@
     </div>
     <footer class="card-footer">
       <router-link :to="`/note/${note.id}`" class="card-footer-item"> Edit </router-link>
-      <a @click.prevent="handleDeleteClick(note.id)" class="card-footer-item"> Delete </a>
+      <a @click.prevent="modals.deleteNote = true" class="card-footer-item"> Delete </a>
     </footer>
+    <modal-delete-note v-if="modals.deleteNote" />
   </div>
 </template>
 
 <script setup>
 //#region imports
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 import { useStoreNotes } from "../../stores/storeNotes";
+import ModalDeleteNote from "./ModalDeleteNote.vue";
 //#endregion
 
 //#region props
@@ -46,5 +48,11 @@ const charLength = computed(() =>
 const handleDeleteClick = (id) => {
   storeNotes.deleteNote(id);
 };
+//#endregion
+
+//#region modals
+const modals = reactive({
+  deleteNote: false,
+});
 //#endregion
 </script>

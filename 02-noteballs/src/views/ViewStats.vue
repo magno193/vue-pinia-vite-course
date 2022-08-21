@@ -46,6 +46,6 @@ const storeNotes = useStoreNotes();
 //#endregion
 
 //#region composable watcher
-useWatchCharacters(noteballsInput);
+useWatchCharacters(noteballsInput, 50);
 //#endregion
 </script>

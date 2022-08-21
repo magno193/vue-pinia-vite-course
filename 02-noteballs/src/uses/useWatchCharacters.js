@@ -1,9 +1,9 @@
 import { watch } from 'vue'
 
-export function useWatchCharacters(toWatch) {
+export function useWatchCharacters(toWatch, maxChars = 100) {
   watch(toWatch, (val) => {
-    if (val.length >= 100) {
-     alert('Não queremos valores maiores que 100!') 
+    if (val.length >= maxChars) {
+      alert(`Não queremos valores maiores que ${maxChars}!`)
     }
   })
 }

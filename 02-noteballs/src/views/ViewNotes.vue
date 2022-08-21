@@ -26,6 +26,7 @@ import { ref } from "vue";
 import TheNote from "@/components/Notes/TheNote.vue";
 import AddEditNote from "@/components/Notes/AddEditNote.vue";
 import { useStoreNotes } from "../stores/storeNotes";
+import { useWatchCharacters } from "../uses/useWatchCharacters";
 //#endregion
 
 //#region store notes
@@ -42,6 +43,10 @@ const addNote = () => {
   noteInput.value = ""; // clear
   addEditNoteRef.value.focusTextarea(); // template ref
 };
+//#endregion
+
+//#region watcher composable
+useWatchCharacters(noteInput);
 //#endregion
 </script>
 

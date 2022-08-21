@@ -19,7 +19,13 @@
       </tbody>
     </table>
 
-    <input type="text" class="input" placeholder="Você ama noteballs?" v-autofocus />
+    <input
+      v-model="noteballsInput"
+      type="text"
+      class="input"
+      placeholder="Você ama noteballs?"
+      v-autofocus
+    />
   </div>
 </template>
 
@@ -27,9 +33,19 @@
 //#region imports
 import { useStoreNotes } from "../stores/storeNotes";
 import { vAutofocus } from "@/directives/vAutofocus";
+import { ref } from "vue";
+import { useWatchCharacters } from "../uses/useWatchCharacters";
+//#endregion
+
+//#region noteballs
+const noteballsInput = ref("");
 //#endregion
 
 //#region store note
 const storeNotes = useStoreNotes();
+//#endregion
+
+//#region composable watcher
+useWatchCharacters(noteballsInput);
 //#endregion
 </script>

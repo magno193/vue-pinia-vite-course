@@ -28,6 +28,8 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import AddEditNote from "../components/Notes/AddEditNote.vue";
 import { useStoreNotes } from "../stores/storeNotes";
+import { useWatchCharacters } from "../uses/useWatchCharacters";
+
 //#endregion
 
 //#region router
@@ -54,5 +56,9 @@ const handleSaveClick = () => {
   storeNotes.updateNote(payload);
   router.back();
 };
+//#endregion
+
+//#region composable de wacher
+useWatchCharacters(noteContent);
 //#endregion
 </script>

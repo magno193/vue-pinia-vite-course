@@ -4,14 +4,14 @@
     <div ref="modalCardRef" class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Deletar nota?</p>
-        <button class="delete" @click="closeModal" />
+        <button @click="closeModal" class="delete" />
       </header>
       <section class="modal-card-body">
         Você tem certeza que deseja deletar esta nota?
       </section>
       <footer class="modal-card-foot is-justify-content-flex-end">
-        <button class="button" @click="closeModal">Cancelar</button>
-        <button class="button is-danger">Deletar</button>
+        <button @click="closeModal" class="button">Cancelar</button>
+        <button @click="handleDeleteNote" class="button is-danger">Deletar</button>
       </footer>
     </div>
   </div>
@@ -21,19 +21,28 @@
 //#region imports
 import { onClickOutside } from "@vueuse/core";
 import { onMounted, onUnmounted, ref } from "vue";
+import { useStoreNotes } from "../../stores/storeNotes";
 //#endregion
 
 //#region props
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
+  },
+  id: {
+    type: String,
+    required: true,
   },
 });
 //#endregion
 
 //#region emits
 const emit = defineEmits(["update:modelValue"]);
+//#endregion
+
+//#region store note
+const storeNotes = useStoreNotes();
 //#endregion
 
 //#region close modal
@@ -59,5 +68,11 @@ onUnmounted(() => {
   // Necessário apagar o event listener para não duplicar-lo em mounted
   document.removeEventListener("keyup", handleCloseKeyboard);
 });
+//#endregion
+
+//#region deletar nota
+const handleDeleteNote = () => {
+  storeNotes.deleteNote(props.id);
+};
 //#endregion
 </script>

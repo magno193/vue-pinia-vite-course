@@ -9,10 +9,16 @@
       </div>
     </div>
     <footer class="card-footer">
-      <router-link :to="`/note/${note.id}`" class="card-footer-item"> Edit </router-link>
-      <a @click.prevent="modals.deleteNote = true" class="card-footer-item"> Delete </a>
+      <router-link :to="`/note/${note.id}`" class="card-footer-item">
+        Editar
+      </router-link>
+      <a @click.prevent="modals.deleteNote = true" class="card-footer-item"> Deletar </a>
     </footer>
-    <modal-delete-note v-if="modals.deleteNote" v-model="modals.deleteNote" />
+    <modal-delete-note
+      v-if="modals.deleteNote"
+      v-model="modals.deleteNote"
+      :id="note.id"
+    />
   </div>
 </template>
 

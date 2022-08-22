@@ -20,7 +20,7 @@
 <script setup>
 //#region imports
 import { onClickOutside } from "@vueuse/core";
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 //#endregion
 
 //#region props
@@ -44,5 +44,20 @@ const closeModal = () => emit("update:modelValue", false); // para mudar parente
 const modalCardRef = ref(null);
 
 onClickOutside(modalCardRef, closeModal);
+//#endregion
+
+//#region keyboard control
+const handleCloseKeyboard = (e) => {
+  if (e.key === "Escape") closeModal();
+};
+
+onMounted(() => {
+  document.addEventListener("keyup", handleCloseKeyboard);
+});
+
+onUnmounted(() => {
+  // Necessário apagar o event listener para não duplicar-lo em mounted
+  document.removeEventListener("keyup", handleCloseKeyboard);
+});
 //#endregion
 </script>

@@ -4,15 +4,34 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Deletar nota?</p>
-        <button class="delete"></button>
+        <button class="delete" @click="closeModal" />
       </header>
       <section class="modal-card-body">
         Você tem certeza que deseja deletar esta nota?
       </section>
       <footer class="modal-card-foot is-justify-content-flex-end">
-        <button class="button">Cancelar</button>
+        <button class="button" @click="closeModal">Cancelar</button>
         <button class="button is-danger">Deletar</button>
       </footer>
     </div>
   </div>
 </template>
+
+<script setup>
+//#region props
+defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+  },
+});
+//#endregion
+
+//#region emits
+const emit = defineEmits(["update:modelValue"]);
+//#endregion
+
+//#region close modal
+const closeModal = () => emit("update:modelValue", false); // para mudar parente
+//#endregion
+</script>

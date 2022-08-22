@@ -1,7 +1,7 @@
 <template>
-  <div class="modal is-active">
+  <div class="modal is-active p-2">
     <div class="modal-background"></div>
-    <div class="modal-card">
+    <div ref="modalCardRef" class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Deletar nota?</p>
         <button class="delete" @click="closeModal" />
@@ -18,6 +18,11 @@
 </template>
 
 <script setup>
+//#region imports
+import { onClickOutside } from "@vueuse/core";
+import { ref } from "vue";
+//#endregion
+
 //#region props
 defineProps({
   modelValue: {
@@ -33,5 +38,11 @@ const emit = defineEmits(["update:modelValue"]);
 
 //#region close modal
 const closeModal = () => emit("update:modelValue", false); // para mudar parente
+//#endregion
+
+//#region outside click close modal
+const modalCardRef = ref(null);
+
+onClickOutside(modalCardRef, closeModal);
 //#endregion
 </script>

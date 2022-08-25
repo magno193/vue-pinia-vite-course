@@ -12,6 +12,18 @@
 //#region imports
 import { RouterView } from "vue-router";
 import NavBar from "@/components/Layout/NavBar.vue";
+import { useStoreNotes } from "./stores/storeNotes";
+import { onMounted } from "vue";
+//#endregion
+
+//#region store
+const storeNotes = useStoreNotes();
+//#endregion
+
+//#region mounted
+onMounted(() => {
+  storeNotes.getNotes();
+});
 //#endregion
 </script>
 

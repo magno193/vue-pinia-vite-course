@@ -1,20 +1,10 @@
 import { defineStore } from 'pinia'
 import { db } from '../js/firebase'
+import { collection, getDocs } from 'firebase/firestore'
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => ({
-    notes: [
-      {
-        id: "id1",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ea voluptas dolore, voluptatibus velit eos iusto dignissimos accusantium molestias, ut magnam, debitis provident id harum?",
-      },
-      {
-        id: "id2",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, expedita.",
-      }
-    ]
+    notes: []
   }),
   getters: {
     getNoteContent(state) {
@@ -28,6 +18,20 @@ export const useStoreNotes = defineStore('storeNotes', {
     totalCharacterNotesCount: (state) => state.notes.reduce((acc, note) => acc + note.content.length, 0)
   },
   actions: {
+    async getNotes() {
+      const query = await getDocs(collection(db, 'notes'))
+      query.forEach((doc) => {
+        let data = doc.data(); // {content: <...>}
+        let dataKey = Object.keys(data).at(0) // "content"
+
+        let note = {
+          id: doc.id,
+          [dataKey]: data[dataKey]
+        }
+
+        this.notes = [...this.notes, note]
+      })
+    },
     addNote(content) {
       this.$state.notes.unshift({
         id: `${Date.now()}@`,

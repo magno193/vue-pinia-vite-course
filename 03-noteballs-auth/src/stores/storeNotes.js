@@ -1,10 +1,19 @@
 import { defineStore } from 'pinia'
 import { db } from '../js/firebase'
-import { collection, deleteDoc, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
+import {
+  collection, deleteDoc, doc,
+  onSnapshot, setDoc, updateDoc,
+  query, orderBy, limit
+} from 'firebase/firestore'
+
+const collectionRef = collection(db, 'notes');
+/** limit poder ser passado como terceiro parâmetro */
+const collectionQuery = query(collectionRef, orderBy('id', 'desc'))
+
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => ({
+    /** mapeado pelo Firestore */
     notes: [],
-    collectionRef: collection(db, 'notes')
   }),
   getters: {
     getNoteContent(state) {
@@ -23,7 +32,8 @@ export const useStoreNotes = defineStore('storeNotes', {
       /**
        * onSnapshot: as mudanças fora da página são refletidas em real time
        */
-      onSnapshot(this.collectionRef, querySnapshot => {
+
+      onSnapshot(collectionQuery, querySnapshot => {
         let notes = []
         querySnapshot.forEach(doc => {
           let data = doc.data(); // {content: <...>}
@@ -43,17 +53,18 @@ export const useStoreNotes = defineStore('storeNotes', {
     async addNote(content) {
       // o id precisa ser string
       const id = String(new Date().getTime())
-      await setDoc(doc(this.collectionRef, id), {
-        content
+      await setDoc(doc(collectionRef, id), {
+        content,
+        id:id // order by precisa ser um campo do documento pra ser utilizado
       })
     },
 
     async deleteNote(id) {
-      await deleteDoc(doc(this.collectionRef, id))
+      await deleteDoc(doc(collectionRef, id))
     },
 
     async updateNote(payload) {
-      await updateDoc(doc(this.collectionRef, payload.id), {
+      await updateDoc(doc(collectionRef, payload.id), {
         content: payload.content
       })
     }

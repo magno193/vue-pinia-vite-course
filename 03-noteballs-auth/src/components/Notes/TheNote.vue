@@ -25,7 +25,6 @@
 <script setup>
 //#region imports
 import { computed, reactive } from "vue";
-import { useStoreNotes } from "../../stores/storeNotes";
 import ModalDeleteNote from "./ModalDeleteNote.vue";
 //#endregion
 
@@ -38,22 +37,12 @@ const props = defineProps({
 });
 //#endregion
 
-//#region store notes
-const storeNotes = useStoreNotes();
-//#endregion
-
 //#region character length
 const charLength = computed(() =>
   props.note.content.length > 1
     ? `${props.note.content.length} caracteres`
     : `${props.note.content.length} caractere`
 );
-//#endregion
-
-//#region metodo handleDeleteClick
-const handleDeleteClick = (id) => {
-  storeNotes.deleteNote(id);
-};
 //#endregion
 
 //#region modals

@@ -36,12 +36,21 @@ export const useStoreNotes = defineStore('storeNotes', {
       onSnapshot(collectionQuery, querySnapshot => {
         let notes = []
         querySnapshot.forEach(doc => {
-          let data = doc.data(); // {content: <...>}
-          let dataKey = Object.keys(data).at(0) // "content"
+          let data = doc.data(); // {[key]: data...}
 
           let note = {
             id: doc.id,
-            [dataKey]: data[dataKey]
+            /**
+             * funcao anonima que auto-executa e posteriormente
+             * realiza spread dos conteudos dentro do objeto data ~doc.data()
+             */
+            ...(() => {
+              let obj = {}
+              for (const key of Object.keys(data)) {
+                obj[key] = data[key]
+              }
+              return obj
+            })()
           }
           notes.push(note)
         })
@@ -54,7 +63,7 @@ export const useStoreNotes = defineStore('storeNotes', {
       const tmstamp = String(new Date().getTime())
       await addDoc(collectionRef, {
         content,
-        date:tmstamp // order by precisa ser um campo do documento pra ser utilizado
+        date: tmstamp // order by precisa ser um campo do documento pra ser utilizado
       })
     },
 

@@ -19,6 +19,12 @@
     <progress v-if="!storeNotes.notesLoaded" class="progress is-large is-success" />
     <template v-else>
       <TheNote :note="note" v-for="note in storeNotes.notes" :key="note.id" />
+      <div
+        v-if="!storeNotes.length"
+        class="is-size-4 has-text-centered has-text-grey-light is-family-monospace py-6"
+      >
+        Não existem notas criadas ainda..
+      </div>
     </template>
   </div>
 </template>

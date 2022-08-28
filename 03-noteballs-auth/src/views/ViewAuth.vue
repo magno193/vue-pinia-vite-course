@@ -56,6 +56,11 @@
 //#region imports
 import { computed, reactive } from "vue";
 import { ref } from "vue";
+import { useStoreAuth } from "../stores/storeAuth";
+//#endregion
+
+//#region stores
+const storeAuth = useStoreAuth();
 //#endregion
 
 //#region register / login
@@ -66,10 +71,9 @@ const titleText = computed(() => (registerFlag.value ? "Registrar" : "Entrar"));
 
 //#region submit method
 const onSubmit = () => {
-  console.log(Object.values(credentials).map((e) => e + "\n"));
   if (!credentials.email || !credentials.password)
     return alert("Por favor insira email e senha");
-  if (registerFlag.value) return alert("Registrando um novo usuário");
+  if (registerFlag.value) return storeAuth.registerUser(credentials);
   if (!registerFlag.value) return alert(`Usuário ${credentials.email} logado`);
 };
 //#endregion

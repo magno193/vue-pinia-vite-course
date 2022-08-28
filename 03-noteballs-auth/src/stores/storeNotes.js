@@ -14,6 +14,7 @@ export const useStoreNotes = defineStore('storeNotes', {
   state: () => ({
     /** mapeado pelo Firestore */
     notes: [],
+    notesLoaded: false,
   }),
   getters: {
     getNoteContent(state) {
@@ -33,6 +34,7 @@ export const useStoreNotes = defineStore('storeNotes', {
        * onSnapshot: as mudanças fora da página são refletidas em real time
        */
 
+      this.notesLoaded = false
       onSnapshot(collectionQuery, querySnapshot => {
         let notes = []
         querySnapshot.forEach(doc => {
@@ -54,7 +56,10 @@ export const useStoreNotes = defineStore('storeNotes', {
           }
           notes.push(note)
         })
-        this.notes = notes
+        setTimeout(() => {
+          this.notes = notes
+          this.notesLoaded = true
+        }, 500);
       })
       //#endregion
     },

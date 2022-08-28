@@ -39,17 +39,17 @@ const props = defineProps({
 });
 //#endregion
 
-//#region character length
+//#region computed
 const charLength = computed(() =>
   props.note.content.length > 1
     ? `${props.note.content.length} caracteres`
     : `${props.note.content.length} caractere`
 );
+
 const formattedDate = computed(() => {
   let formatted = new Date(parseInt(props.note.date));
   return useDateFormat(formatted, "DD/MM/YYYY - HH:mm:ss").value;
 });
-
 //#endregion
 
 //#region modals

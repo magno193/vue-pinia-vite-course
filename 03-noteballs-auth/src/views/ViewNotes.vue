@@ -16,7 +16,10 @@
       </template>
     </AddEditNote>
 
-    <TheNote :note="note" v-for="note in storeNotes.notes" :key="note.id" />
+    <progress v-if="!storeNotes.notesLoaded" class="progress is-large is-success" />
+    <template v-else>
+      <TheNote :note="note" v-for="note in storeNotes.notes" :key="note.id" />
+    </template>
   </div>
 </template>
 
@@ -36,7 +39,9 @@ const storeNotes = useStoreNotes();
 //#region notes
 const noteInput = ref("");
 const addEditNoteRef = ref(null); // template ref
+//#endregion
 
+//#region add notes context
 const addNote = () => {
   storeNotes.addNote(noteInput.value);
 

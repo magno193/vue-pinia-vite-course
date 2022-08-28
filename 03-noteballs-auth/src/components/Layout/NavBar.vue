@@ -26,6 +26,9 @@
         :class="{ 'is-active': showMobileNav }"
         ref="navbarMenuRef"
       >
+        <div class="navbar-start">
+          <button class="button is-small is-info mt-3 ml-3">Sair</button>
+        </div>
         <div class="navbar-end">
           <RouterLink
             :to="{ name: 'notes' }"

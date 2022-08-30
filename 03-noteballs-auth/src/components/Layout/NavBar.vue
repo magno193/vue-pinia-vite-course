@@ -27,7 +27,9 @@
         ref="navbarMenuRef"
       >
         <div class="navbar-start">
-          <button class="button is-small is-info mt-3 ml-3">Sair</button>
+          <button @click="storeAuth.logoutUser" class="button is-small is-info mt-3 ml-3">
+            Sair
+          </button>
         </div>
         <div class="navbar-end">
           <RouterLink
@@ -56,6 +58,11 @@
 //#region imports
 import { onClickOutside } from "@vueuse/core";
 import { ref } from "vue";
+import { useStoreAuth } from "../../stores/storeAuth";
+//#endregion
+
+//#region stores
+const storeAuth = useStoreAuth();
 //#endregion
 
 //#region mobile nav

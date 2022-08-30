@@ -74,7 +74,7 @@ const onSubmit = () => {
   if (!credentials.email || !credentials.password)
     return alert("Por favor insira email e senha");
   if (registerFlag.value) return storeAuth.registerUser(credentials);
-  if (!registerFlag.value) return alert(`Usuário ${credentials.email} logado`);
+  if (!registerFlag.value) return storeAuth.loginUser(credentials);
 };
 //#endregion
 

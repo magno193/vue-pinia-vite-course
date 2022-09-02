@@ -14,10 +14,14 @@ export const useStoreAuth = defineStore('storeAuth', {
   actions: {
     init() {
       onAuthStateChanged(auth, (user) => {
-        if (!user) return this.user = {}
+        if (!user) {
+          this.router.replace('/auth')
+          return this.user = {}
+        }
 
         this.user.id = user.uid
         this.user.email = user.email
+        this.router.push('/') // plugin router
       })
     },
     async registerUser(credentials) {
@@ -28,7 +32,7 @@ export const useStoreAuth = defineStore('storeAuth', {
         const user = response.user
         console.log('user: ', user);
       } catch (error) {
-        // console.log(`Erro: ${error.message}`); 
+        console.log(`Erro: ${error.message}`);
       }
     },
 
@@ -40,7 +44,7 @@ export const useStoreAuth = defineStore('storeAuth', {
         const user = response.user
         console.log('user: ', user);
       } catch (error) {
-        // console.log(`Erro: ${error.message}`);
+        console.log(`Erro: ${error.message}`);
       }
     },
 

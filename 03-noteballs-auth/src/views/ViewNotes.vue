@@ -31,7 +31,7 @@
 
 <script setup>
 //#region imports
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import TheNote from "@/components/Notes/TheNote.vue";
 import AddEditNote from "@/components/Notes/AddEditNote.vue";
 import { useStoreNotes } from "../stores/storeNotes";
@@ -40,6 +40,12 @@ import { useWatchCharacters } from "../uses/useWatchCharacters";
 
 //#region store notes
 const storeNotes = useStoreNotes();
+//#endregion
+
+//#region mounted
+onMounted(() => {
+  storeNotes.getNotes();
+});
 //#endregion
 
 //#region notes

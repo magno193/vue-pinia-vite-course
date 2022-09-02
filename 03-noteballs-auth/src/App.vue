@@ -12,17 +12,17 @@
 //#region imports
 import { RouterView } from "vue-router";
 import NavBar from "@/components/Layout/NavBar.vue";
-import { useStoreNotes } from "./stores/storeNotes";
+import { useStoreAuth } from "./stores/storeAuth";
 import { onMounted } from "vue";
 //#endregion
 
 //#region store
-const storeNotes = useStoreNotes();
+const storeAuth = useStoreAuth();
 //#endregion
 
 //#region mounted
 onMounted(() => {
-  storeNotes.getNotes();
+  storeAuth.init();
 });
 //#endregion
 </script>

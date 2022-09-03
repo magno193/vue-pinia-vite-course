@@ -5,10 +5,10 @@ import {
   onSnapshot, addDoc, updateDoc,
   query, orderBy
 } from 'firebase/firestore'
+import { useStoreAuth } from './storeAuth'
 
-const collectionRef = collection(db, 'notes');
-/** limit poder ser passado como terceiro parâmetro */
-const collectionQuery = query(collectionRef, orderBy('date', 'desc'))
+let collectionRef,
+  collectionQuery;
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => ({
@@ -28,6 +28,13 @@ export const useStoreNotes = defineStore('storeNotes', {
     totalCharacterNotesCount: (state) => state.notes.reduce((acc, note) => acc + note.content.length, 0)
   },
   actions: {
+    init() {
+      const storeAuth = useStoreAuth()
+
+      collectionRef = collection(db, 'users', storeAuth.user.id, 'notes');
+      collectionQuery = query(collectionRef, orderBy('date', 'desc'))
+      this.getNotes()
+    },
     async getNotes() {
       //#region real time db
       /**

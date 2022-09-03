@@ -6,6 +6,7 @@ import {
 } from 'firebase/auth'
 import { defineStore } from 'pinia'
 import { auth } from '../js/firebase'
+import { useStoreNotes } from './storeNotes'
 
 export const useStoreAuth = defineStore('storeAuth', {
   state: () => ({
@@ -22,6 +23,7 @@ export const useStoreAuth = defineStore('storeAuth', {
         this.user.id = user.uid
         this.user.email = user.email
         this.router.push('/') // plugin router
+        useStoreNotes().init()
       })
     },
     async registerUser(credentials) {

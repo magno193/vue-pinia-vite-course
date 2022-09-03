@@ -44,12 +44,6 @@ export const useStoreNotes = defineStore('storeNotes', {
 
       this.notesLoaded = false
 
-      /**
-       * Para permitir múltiplos logins de pessoas diferentes em uma máquina
-       * dev-se desinscrever o listener já ativo
-       */
-      if (getNotesSnapshot) getNotesSnapshot() // remove o listener ativo se já estiver presente
-
       getNotesSnapshot = onSnapshot(collectionQuery, querySnapshot => {
         let notes = []
         querySnapshot.forEach(doc => {
@@ -81,6 +75,11 @@ export const useStoreNotes = defineStore('storeNotes', {
 
     clearNotes(){
       this.notes = []
+      /**
+      * Para permitir múltiplos logins de pessoas diferentes em uma máquina
+      * dev-se desinscrever o listener já ativo
+      */
+      if (getNotesSnapshot) getNotesSnapshot() // remove o listener ativo se já estiver presente
     },
 
     async addNote(content) {

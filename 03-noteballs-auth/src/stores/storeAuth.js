@@ -17,6 +17,7 @@ export const useStoreAuth = defineStore('storeAuth', {
       onAuthStateChanged(auth, (user) => {
         if (!user) {
           this.router.replace('/auth')
+          useStoreNotes().clearNotes()
           return this.user = {}
         }
 

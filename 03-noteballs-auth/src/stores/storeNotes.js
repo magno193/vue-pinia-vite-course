@@ -71,6 +71,10 @@ export const useStoreNotes = defineStore('storeNotes', {
       //#endregion
     },
 
+    clearNotes(){
+      this.notes = []
+    },
+
     async addNote(content) {
       const tmstamp = String(new Date().getTime())
       await addDoc(collectionRef, {

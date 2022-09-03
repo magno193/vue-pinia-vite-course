@@ -20,7 +20,7 @@
     <template v-else>
       <TheNote :note="note" v-for="note in storeNotes.notes" :key="note.id" />
       <div
-        v-if="!storeNotes.length"
+        v-if="!storeNotes.notes.length"
         class="is-size-4 has-text-centered has-text-grey-light is-family-monospace py-6"
       >
         Não existem notas criadas ainda..

@@ -8,7 +8,8 @@ import {
 import { useStoreAuth } from './storeAuth'
 
 let collectionRef,
-  collectionQuery;
+  collectionQuery,
+  getNotesSnapshot;
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => ({
@@ -42,7 +43,14 @@ export const useStoreNotes = defineStore('storeNotes', {
        */
 
       this.notesLoaded = false
-      onSnapshot(collectionQuery, querySnapshot => {
+
+      /**
+       * Para permitir múltiplos logins de pessoas diferentes em uma máquina
+       * dev-se desinscrever o listener já ativo
+       */
+      if (getNotesSnapshot) getNotesSnapshot() // remove o listener ativo se já estiver presente
+
+      getNotesSnapshot = onSnapshot(collectionQuery, querySnapshot => {
         let notes = []
         querySnapshot.forEach(doc => {
           let data = doc.data(); // {[key]: data...}

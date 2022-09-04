@@ -3,6 +3,7 @@ import ViewNotes from '@/views/ViewNotes.vue'
 import ViewEditNote from '@/views/ViewEditNote.vue'
 import ViewStats from '@/views/ViewStats.vue'
 import ViewAuth from '@/views/ViewAuth.vue'
+import { useStoreAuth } from '../stores/storeAuth'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -29,4 +30,16 @@ const router = createRouter({
   ]
 })
 
+//#region Navigation Guards
+router.beforeEach(async (to, from) => {
+  const storeAuth = useStoreAuth()
+  console.log('to:', to);
+
+  if (!storeAuth.user.id && to.name !== 'auth')
+    return { name: 'auth' }
+
+  if (storeAuth.user.id && to.name === 'auth')
+    return false
+})
+//#endregion
 export default router

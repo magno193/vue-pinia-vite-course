@@ -69,11 +69,11 @@ export const useStoreNotes = defineStore('storeNotes', {
           this.notes = notes
           this.notesLoaded = true
         }, 500);
-      })
+      }, error => console.log('error.message:', error.message))
       //#endregion
     },
 
-    clearNotes(){
+    clearNotes() {
       this.notes = []
       /**
       * Para permitir múltiplos logins de pessoas diferentes em uma máquina

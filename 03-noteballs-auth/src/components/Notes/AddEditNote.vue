@@ -6,8 +6,8 @@
     <div class="field">
       <div class="control">
         <textarea
-          v-model="modelValue"
-          @input="$emit('update:modelValue', modelValue)"
+          v-model="mdValue"
+          @input="handleInput"
           class="textarea"
           :placeholder="placeholder"
           ref="textareaRef"
@@ -26,12 +26,12 @@
 
 <script setup>
 //#region imports
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { vAutofocus } from "@/directives/vAutofocus";
 //#endregion
 
 //#region props
-defineProps({
+const props = defineProps({
   modelValue: {
     type: String,
     required: true,
@@ -51,9 +51,16 @@ defineProps({
 //#endregion
 
 //#region emits
-defineEmits(["update:modelValue"]);
-//#endregion
+const emit = defineEmits(["update:modelValue"]);
 
+const mdValue = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(mdValue) {
+    emit("update:modelValue", mdValue);
+  },
+});
 //#region focus textarea
 const textareaRef = ref(null);
 
